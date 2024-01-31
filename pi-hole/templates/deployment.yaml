@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+    name: pihole-deployment
+    labels:
+      app: pihole
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+          app: pihole
+
+    template:
+      metadata:
+        labels:
+          app: pihole
+      spec:
+        containers:
+          - name: pihole
+            image: pihole/pihole:latest
+            ports:
+              - name: tpc
+                protocol: TCP
+                containerPort: {{ .Values.ports.tcp }}
+              - name: udp
+                protocol: UDP
+                containerPort: {{ .Values.ports.udp }}
+              - name: tcp-2
+                protocol: TCP
+                containerPort: {{ .Values.ports.tcp_2 }}
+              - name: udp-2
+                protocol: UDP
+                containerPort: {{ .Values.ports.udp_2 }}
+

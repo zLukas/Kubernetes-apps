@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pihole-svc
+  labels:
+    app: pihole
+spec:
+  type: NodePort
+  ports:
+  - name: tpc-udp
+    port: 54
+    targetPort: {{ .Values.ports.tcp }}
+  - name: tpc-2
+    port: 8081
+    targetPort: {{ .Values.ports.tcp_2 }}
+    protocol: TCP
+  - name: udp-2
+    port: 68
+    targetPort: {{ .Values.ports.udp_2 }}
+    protocol: TCP
+  selector:
+    app: pihole

@@ -1,0 +1,5 @@
+ports:
+  tcp: 53
+  udp: 53
+  tcp_2: 80
+  udp_2: 67
